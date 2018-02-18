@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>saml-sans-shibd demo</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>saml-sans-shibd demo with UW IdP</h1>
+      <p>reference: <a target="_blank" href="https://github.com/onelogin/python3-saml">onelogin python3-saml</a></p>
+      {% block content %}
+          {% if attributes %}
+              <table class="table table-striped">
+                  <thead><th>Name</th><th>Values</th></thead>
+                  <tbody>
+                  {% for attr in attributes %}
+                      <tr><td>{{ attr.0 }}</td>
+                          <td><ul class="list-unstyled">
+                              {% for val in attr.1 %}
+                                  <li>{{ val }}</li>
+                              {% endfor %}
+                          </ul></td></tr>
+                  {% endfor %}
+                  </tbody>
+              </table>
+              <a href="/logout" class="btn btn-danger">Logout</a>
+          {% else %}
+              <a href="/login" class="btn btn-primary">Login</a>
+          {% endif %}
+      {% endblock %}
+    </div>
+  </body>
+</html>

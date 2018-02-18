@@ -1,0 +1,8 @@
+musl
+build-base
+python3-dev
+python-dev
+libxml2-dev
+libxslt-dev
+xmlsec-dev
+pkgconf
