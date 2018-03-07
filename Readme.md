@@ -14,8 +14,11 @@ setting depends on your platform, of course.
 
 ```
 echo '127.0.0.1   docker.internal' >> /etc/hosts
+# cd into saml-sans-shibd. `pwd` could be replaced with the full directory
+# of your project.
 openssl req -x509 -newkey rsa:4096 -nodes \
 	-out cert.pem -keyout key.pem -days 365
+
 docker run --name flaskapp --restart=always -p 443:443 -v `pwd`:/app \
        -d jazzdd/alpine-flask:python3 -d
 ```
