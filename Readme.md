@@ -8,6 +8,10 @@ and the key dependency is OneLogin's
 
 ## Run instructions
 
+Only assumption is that you have docker installed. The openssl command generates
+a cert/key pair on the fly, however any cert/key will do. Changing your hosts
+setting depends on your platform, of course.
+
 ```
 echo '127.0.0.1   docker.internal' >> /etc/hosts
 openssl req -x509 -newkey rsa:4096 -nodes \
