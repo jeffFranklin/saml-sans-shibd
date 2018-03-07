@@ -4,7 +4,6 @@ import flask
 from urllib.parse import urlparse
 from onelogin.saml2.auth import OneLogin_Saml2_Auth
 
-
 app = flask.Flask(__name__)
 app.config['SECRET_KEY'] = 'change this secret or else'
 app.config['SAML_PATH'] = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'saml')

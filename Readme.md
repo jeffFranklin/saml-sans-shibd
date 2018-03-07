@@ -28,3 +28,17 @@ You can tail the logs via `docker logs -f flaskapp` to see when it's ready.
 
 Now point your browser at `https://docker.internal`, authenticate, and 
 see your attributes.
+
+## Results
+
+Initial page:
+
+![page 1](images/page1.png)
+
+IdP page:
+
+![page 2](images/page2.png)
+
+Page displaying attributes after a succesful authentication:
+
+![page 3](images/page3.png)
