@@ -17,7 +17,22 @@ need to do).
 
 ### Add your SP config
 
-python-saml has a json configuration convention which we employ.
+python-saml has a can be a json file or a python dict. We go the dict route for
+this demo, which you can see [here](saml.py). The idp section likely stays the
+same, your `entityId` and `assertionConsumerService.url` are possibly all you
+need to change.
+
+### Add a login redirect
+
+For our flask app you can find it as `@app.route('/login')` in [app.py](app.py).
+It initiates a saml request to redirect to the IdP.
+
+### Add a SAML response handler
+
+We do this here as `@app.route('/Shibboleth.sso/SAML2/POST', methods=['POST'])`
+in [app.py](app.py). We're piggybacking off of an existing shib SP, hence
+the `/Shibboleth.sso/SAML2/POST`, but you will probably want to register a
+better-named endpoint that the IdP will post back to.
 
 ## Run instructions
 
