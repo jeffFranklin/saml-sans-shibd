@@ -2,9 +2,37 @@
 
 This project demonstrates a SAML login to UW's IdP without Shibboleth. This
 allows us to be a SAML SP without the added baggage of running shibd and
-apache mod_shib. This is a flask application running inside a docker container,
-and the key dependency is OneLogin's 
-[python3-saml package](https://github.com/onelogin/python3-saml).
+apache mod_shib. For the purpose of demonstration we use a flask application
+running inside a docker container, however this could just as easily be a
+django app running inside a virtualenv. The key dependency is OneLogin's 
+[python3-saml package](https://github.com/onelogin/python3-saml). This demo is
+also targeted at python3.6, but python2.7 would essentially be the same, albeit
+with th [python-saml package](https://github.com/onelogin/python-saml).
+
+## Three steps to SAML
+
+There are three steps to making your app into a SAML SP (ok, four if you include
+the SP registration, which this demo already has done but your SP will certainly
+need to do).
+
+### Add your SP config
+
+python-saml has a can be a json file or a python dict. We go the dict route for
+this demo, which you can see [here](saml.py). The idp section likely stays the
+same, your `entityId` and `assertionConsumerService.url` are possibly all you
+need to change.
+
+### Add a login redirect
+
+For our flask app you can find it as `@app.route('/login')` in [app.py](app.py).
+It initiates a saml request to redirect to the IdP.
+
+### Add a SAML response handler
+
+We do this here as `@app.route('/Shibboleth.sso/SAML2/POST', methods=['POST'])`
+in [app.py](app.py). We're piggybacking off of an existing shib SP, hence
+the `/Shibboleth.sso/SAML2/POST`, but you will probably want to register a
+better-named endpoint that the IdP will post back to.
 
 ## Run instructions
 
