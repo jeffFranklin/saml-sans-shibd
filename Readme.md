@@ -2,9 +2,22 @@
 
 This project demonstrates a SAML login to UW's IdP without Shibboleth. This
 allows us to be a SAML SP without the added baggage of running shibd and
-apache mod_shib. This is a flask application running inside a docker container,
-and the key dependency is OneLogin's 
-[python3-saml package](https://github.com/onelogin/python3-saml).
+apache mod_shib. For the purpose of demonstration we use a flask application
+running inside a docker container, however this could just as easily be a
+django app running inside a virtualenv. The key dependency is OneLogin's 
+[python3-saml package](https://github.com/onelogin/python3-saml). This demo is
+also targeted at python3.6, but python2.7 would essentially be the same, albeit
+with th [python-saml package](https://github.com/onelogin/python-saml).
+
+## Three steps to SAML
+
+There are three steps to making your app into a SAML SP (ok, four if you include
+the SP registration, which this demo already has done but your SP will certainly
+need to do).
+
+### Add your SP config
+
+python-saml has a json configuration convention which we employ.
 
 ## Run instructions
 
