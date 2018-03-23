@@ -3,10 +3,10 @@ from flask import request, session
 import flask
 from urllib.parse import urlparse
 from onelogin.saml2.auth import OneLogin_Saml2_Auth
+import saml  # TODO: make relative import
 
-app = flask.Flask(__name__)
+app = flask.Flask(__name__, template_folder='.')
 app.config['SECRET_KEY'] = 'change this secret or else'
-app.config['SAML_PATH'] = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'saml')
 
 
 class FlaskSaml(OneLogin_Saml2_Auth):
@@ -20,7 +20,7 @@ class FlaskSaml(OneLogin_Saml2_Auth):
             'get_data': request.args.copy(),
             'post_data': request.form.copy()
         }
-        super().__init__(request_data, custom_base_path=app.config['SAML_PATH'])
+        super().__init__(request_data, old_settings=saml.CONFIG)
 
     def get_attributes(self):
         """
